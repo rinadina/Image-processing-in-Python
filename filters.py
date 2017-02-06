@@ -1,5 +1,3 @@
-""" SYSC 1005 A Fall 2015 Lab 4 - Part 3.
-"""
 
 from Cimpl import *
 
