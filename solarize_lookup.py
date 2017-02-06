@@ -24,9 +24,6 @@ def build_solarize_lookup_table(threshold):
 
     return lookup
 
-# Create three lookup tables for the solarizing function, every time this 
-# module is loaded into the Python interpreter; e.g., by clicking Run.
-
 solarize_64_table = build_solarize_lookup_table(64)
 solarize_128_table = build_solarize_lookup_table(128)
 solarize_196_table = build_solarize_lookup_table(196)
