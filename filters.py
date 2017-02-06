@@ -4,17 +4,11 @@
 from Cimpl import *
 
 #--------------------------------------
-# This function was presented in class:
 
 def grayscale(img):
     """ (Cimpl.Image) -> None
     
     Convert the specified picture into a grayscale image.
-    
-    >>> image = load_image(choose_file()) 
-    >>> grayscale(image)
-    >>> show(image)        
-    """
     
     for pixel in img:
         x, y, col = pixel
@@ -46,40 +40,27 @@ def negative(img):
 
 def weighted_grayscale(img):
     """ (Cimpl.Image) -> None
-                
-                Convert the specified picture into a grayscale image.
-                
-                >>> image = load_image(choose_file()) 
-                >>> grayscale(image)
-                >>> show(image)        
-                """            
+              
     for pixel in img:
             x, y, col = pixel
             r, g, b = col    
             
-            #first, find the appropriate percentage of each color needed for the grayscale#
+            #percentage of each color needed for the grayscale: #
             
             r = r * 0.299
             g = g * 0.587
             b = b * 0.114
             
             #for grayscale, each color has the same brightness, which is a combination of all three colors#
-            #Hence, find sum of colors for brightness#
+            #Hence, sum of colors for brightness#
             
             brightness = r + g + b
             gray = create_color(brightness,brightness,brightness)
                     
             set_color(img, x, y, gray)   
             
-
-
-
-
-
-            
-            
             #---------------------------------------------------------------
-            # A filter that uses three if statements to check every pixel's
+            # A filter that checks every pixel's
             # red, green and blue components, individually.
             
 def solarize(img, threshold):
@@ -111,9 +92,6 @@ def solarize(img, threshold):
                     set_color(img, x, y, col)
             
             
-            #--------------------------------------
-            # A filter that uses an if-else statement.
-            
 def black_and_white(img):
                 """ (Cimpl.Image) -> None
                 
@@ -123,10 +101,6 @@ def black_and_white(img):
                 >>> black_and_white(image)
                 >>> show(image)     
                 """
-            
-                # Brightness levels range from 0 to 255.
-                # Change the colour of each pixel to black or white, depending on whether
-                # its brightness is in the lower or upper half of this range.
             
                 black = create_color(0, 0, 0)
                 white = create_color(255, 255, 255)
@@ -143,7 +117,6 @@ def black_and_white(img):
             
             
             #--------------------------------------
-            # A filter that uses an if-elif-else statement.
             
 def black_and_white_and_gray(img):
                 """ (Cimpl.Image) -> None
@@ -160,10 +133,6 @@ def black_and_white_and_gray(img):
                 gray = create_color(128, 128, 128)
                 white = create_color(255, 255, 255)
             
-                # Brightness levels range from 0 to 255. Change the colours of
-                # pixels whose brightness is in the lower third of this range to black,
-                # in the upper third to white, and in the middle third to medium-gray.
-            
                 for x, y, col in img:
                     red, green, blue = col
                     
@@ -179,7 +148,6 @@ def black_and_white_and_gray(img):
             
             #-----------------------------------------------------------------
             
-  #exercise 2#    
 def extreme_contrast(img):
     """(Cimpl.Image)->None
     Modify img, maximizing the contrast between the light and dark
@@ -206,9 +174,6 @@ def extreme_contrast(img):
         col = create_color(red, green, blue)
         set_color(img, x, y, col)            
             
-        
-#Exercise 3#
-
 def sepia_tint(img):
     
     grayscale(img)
@@ -230,8 +195,7 @@ def sepia_tint(img):
         
         col = create_color(red, green, blue)
         set_color(img, x, y, col)
-   
-   #Exercise 4#     
+       
 def _adjust_component(amount):
     """(int) -> int
     Divides the rage 0 to 255 into 4 equal parts. Then, returns midpoint
@@ -246,7 +210,6 @@ def _adjust_component(amount):
     else:
         return 223
     
-    #Exercise 5#
 def posterize(img):
     for x, y, col in img:
         red, green, blue = col 
@@ -258,11 +221,9 @@ def posterize(img):
         col = create_color(red, green, blue)
         set_color(img, x, y, col)    
         
-        
-#Exercise 6#
 def simplify(img):
     """(Cimpl.Image)->None
-    Modify img so that each pixel is white, black, red, green or blue. Very bright pixels become white
+    Modifies img so that each pixel is white, black, red, green or blue. Very bright pixels become white
     Very dark pixels become black
     The rest become red, green or blue based on which component is the largest"""
     
@@ -284,7 +245,6 @@ def simplify(img):
             col = create_color(0, 0, 255)
         set_color(img, x, y, col)
     
-#From blur_filter.py#
 
 def blur(source):
     """ (Cimpl.Image) -> Cimpl.Image
@@ -302,27 +262,9 @@ def blur(source):
     
     target = copy(source)
     
-    # Recall that the x coordinates of an image's pixels range from 0 to
-    # get_width() - 1, inclusive, and the y coordinates range from 0 to
-    # get_height() - 1.
-    #
     # To blur the pixel at location (x, y), we use that pixel's RGB components,
     # as well as the components from the four neighbouring pixels located at
     # coordinates (x - 1, y), (x + 1, y), (x, y - 1) and (x, y + 1).
-    #
-    # As such, we can't use this loop to generate the x and y coordinates:
-    #
-    # for y in range(0, get_height(source)):
-    #     for x in range(0, get_width(source)):
-    #
-    # With this loop, when x or y is 0, subtracting 1 from x or y yields -1, 
-    # which is not a valid coordinate. Similarly, when x equals get_width() - 1 
-    # or y equals get_height() - 1, adding 1 to x or y yields a coordinate that
-    # is too large.
-    #
-    # We have to adjust the arguments passed to range to ensure that (x, y)
-    # never specifies the location of pixel on the top, bottom, left or right 
-    # edge of the image, because those pixels don't have four neighbours.
     
     for y in range(1, get_height(source) - 1):
         for x in range(1, get_width(source) - 1):
