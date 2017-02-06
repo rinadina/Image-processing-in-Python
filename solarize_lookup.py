@@ -1,5 +1,3 @@
-# SYSC 1005 Fall 2015
-# Implementing Lookup Tables Using Lists
 
 from Cimpl import *
 
